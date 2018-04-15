@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -f managebox.tar.gz
-curl http://managebox.ir/download/latest.tar.gz -o managebox.tar.gz -s
+curl https://github.com/projectboxio/Open-ManageBox/raw/master/managebox.tar.gz -o managebox.tar.gz -s
 rm -rf /usr/local/managebox
 mkdir /usr/local/managebox
 tar -xzf managebox.tar.gz -C /usr/local/managebox
