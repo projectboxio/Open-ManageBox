@@ -1,6 +1,7 @@
 #!/bin/bash
+yum install wget -y
 rm -f managebox.tar.gz
-curl https://github.com/projectboxio/Open-ManageBox/raw/master/managebox.tar.gz -o managebox.tar.gz -s
+wget https://github.com/projectboxio/Open-ManageBox/raw/master/managebox.tar.gz
 rm -rf /usr/local/managebox
 mkdir /usr/local/managebox
 tar -xzf managebox.tar.gz -C /usr/local/managebox
