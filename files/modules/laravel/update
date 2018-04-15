@@ -1,0 +1,6 @@
+#!/bin/bash
+giturl=$1
+git clone ${giturl}
+composer install
+if php -r \"file_exists('.env') || copy('.env.example', '.env');\"
+php artisan key:generate

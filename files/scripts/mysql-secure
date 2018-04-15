@@ -1,0 +1,11 @@
+pw=`pwgen 16 1`
+echo $pw > /usr/local/deploybox/data/main/mysql-pwd
+mysql -e "UPDATE mysql.user SET Password = PASSWORD('${pw}') WHERE User = 'root'"
+# Kill the anonymous users
+mysql -e "DROP USER ''@'localhost'"
+# Because our hostname varies we'll use some Bash magic here.
+mysql -e "DROP USER ''@'$(hostname)'"
+# Kill off the demo database
+mysql -e "DROP DATABASE test"
+# Make our changes take effect
+mysql -e "FLUSH PRIVILEGES"

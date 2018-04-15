@@ -1,0 +1,16 @@
+#!/bin/bash
+rm -f deploybox.tar.gz
+curl http://deploybox.ir/download/latest.tar.gz -o deploybox.tar.gz -s
+rm -rf /usr/local/deploybox
+mkdir /usr/local/deploybox
+tar -xzf deploybox.tar.gz -C /usr/local/deploybox
+rm -f deploybox.tar.gz
+
+chmod 700 /usr/local/deploybox
+chmod 700 /usr/local/deploybox/scripts
+chmod 700 /usr/local/deploybox/data
+chmod 700 /usr/local/deploybox/data/main
+chmod 600 /usr/local/deploybox/data/main/*
+chmod 700 /usr/local/deploybox/scripts/*
+/usr/local/deploybox/scripts/install-requirments
+/usr/local/deploybox/scripts/mysql-secure

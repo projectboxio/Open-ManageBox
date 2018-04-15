@@ -1,0 +1,11 @@
+#!/bin/bash
+yum update -y
+yum install -y wget gcc gcc-c++ flex bison make bind bind-libs bind-utils openssl openssl-devel perl quota libaio libcom_err-devel libcurl-devel gd zlib-devel zip unzip libcap-devel cronie bzip2 cyrus-sasl-devel perl-ExtUtils-Embed autoconf automake libtool which patch mailx db4-devel nano perl-libwww-perl perl-Time-HiRes bash-comp*
+yum install -y epel-release
+yum install -y  git rrdtool rrdtool-perl pwgen perl-libwww-perl perl-MailTools perl-MIME-Lite perl-CGI perl-DBI perl-XML-Simple perl-Config-General perl-HTTP-Server-Simple perl-IO-Socket-SSL htop iotop
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &> /dev/null
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm &> /dev/null
+yum install -y php70w* --skip-broken
+yum install -y  mariadb-server mariadb nginx
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer -f

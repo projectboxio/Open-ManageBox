@@ -1,0 +1,33 @@
+#!/bin/bash
+module_dir=/usr/local/managebox/modules/laravel
+nginx_vhosts=/etc/nginx/vhosts.d
+php_fpm=/etc/php-fpm.d
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+
+action_code=$1
+
+if [ $1 == new ]
+then
+  username=$2
+  domain=$3
+  giturl=$4
+  adduser ${username}
+  chown ${username}:${nginx} /home/${username}
+  chmod 730 /home/${username}
+  temp_dir=`mktemp -d`
+  cp ${module_dir}/fpm.conf ${temp_dir}/${username}.conf
+  cp ${module_dir}/fpm.conf ${temp_dir}/${domain}.conf
+  sed -i -- 's/_username_/${username}/g' ${temp_dir}/${username}.conf
+  sed -i -- 's/_domain_/${domain}/g' ${temp_dir}/${domain}.conf
+  mkdir -p ${nginx_vhosts}
+  cp ${temp_dir}/${domain}.conf ${nginx_vhosts}
+  cp ${temp_dir}/${username}.conf ${php_fpm}
+  systemctl restart nginx
+  systemctl restart php-fpm
+  su - ${username} -c "deploy ${giturl}"
+  echo ""
+  echo "${green}app created successfully!${reset}"
+fi
